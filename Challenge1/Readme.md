@@ -7,7 +7,7 @@ a remote location as part of terraform init). In this scenario, we will use a lo
 We set variables by using a variables definition file. The variables definition file allows
 you to parameterize configuration code without having to hardcode default values. It
 uses the same basic syntax as Terraform configuration but consists only of variable
-names and assignments. Create a new file called terraform.tfvars
+names and assignments. 
 
 
 ![image](https://user-images.githubusercontent.com/32632363/133883949-ef715974-2259-4417-b39c-11286b3df83b.png)
