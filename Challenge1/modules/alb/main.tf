@@ -33,6 +33,40 @@ resource "aws_key_pair" "generated_key" {
   key_name   = var.ssh_keypair
   public_key = tls_private_key.example.public_key_openssh
 }
+
+# Create pem locally
+provisioner "local-exec" { 
+    command = "echo '${tls_private_key.pk.private_key_pem}' > ./${var.namespace}.pem"
+}
+
+# Create S3 Bucket   
+resource "aws_s3_bucket" "private_access" {
+   bucket = "${var.namespace}"
+   acl = "private"
+   versioning {
+      enabled = true
+   }
+   tags = {
+     Name = "Bucket1"
+     Environment = var.namespace
+   }
+} 
+
+# Copy Key to S3 Bucket    
+resource "aws_s3_bucket_object" "login-path" {
+    bucket = "${aws_s3_bucket.private_access.bucket.id}"
+    acl    = "private"
+    key    = "login-path"
+    source = "./${var.namespace}.pem"
+}  
+
+# Remove pem from local system
+provisioner "local-exec" { 
+    command = "rm -rf ./${var.namespace}.pem"
+}  
+  
+  
+  
   
 resource "aws_launch_template" "webserver" {
   name_prefix   = var.namespace
