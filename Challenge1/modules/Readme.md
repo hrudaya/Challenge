@@ -7,10 +7,7 @@ For this scenario, we will split the project into three major components:
 - Autoscaling—Load balancer, EC2 autoscaling group, and launch template
   resources
   
-  Standards in each Module
-  main.tf      — the primary entry point
-  outputs.tf   — declarations for all output values
-  variables.tf — declarations for all input variable
+  
   
   These three major components are:
   
