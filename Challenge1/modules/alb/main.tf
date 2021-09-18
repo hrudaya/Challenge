@@ -3,14 +3,14 @@ module "iam_instance_profile" {
   actions = ["logs:*", "rds:*"] 
 }
 
-#  This is a fairly simple cloud init file. All it does is install some packages, create a configuration file (/etc/server.conf),
+#  This is a fairly simple cloud init file. All it does is install some packages, create a configuration file (/etc/server.conf),
 #  fetch application code (deployment.zip) and start the server  
 data "cloudinit_config" "config" {
   gzip          = true
   base64_encode = true
   part {
     content_type = "text/cloud-config"
-    content      = templatefile("${path.module}/cloud_config.yaml", var.db_config) #B
+    content      = templatefile("${path.module}/cloud_config.yaml", var.db_config) 
   }
 }
 # Get the AMI id's
