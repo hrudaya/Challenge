@@ -3,9 +3,9 @@ variable "namespace" {
 }
 
 variable "vpc" {
-  type = any #A
+  type = any 
 }
 
 variable "sg" {
-  type = any #A
+  type = any 
 }
