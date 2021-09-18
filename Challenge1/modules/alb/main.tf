@@ -23,6 +23,16 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"]
 }
 
+resource "tls_private_key" "example" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "aws_key_pair" "generated_key" {
+  key_name   = var.key_name
+  public_key = tls_private_key.example.public_key_openssh
+}
+  
 resource "aws_launch_template" "webserver" {
   name_prefix   = var.namespace
   image_id      = data.aws_ami.ubuntu.id
