@@ -9,6 +9,12 @@ you to parameterize configuration code without having to hardcode default values
 uses the same basic syntax as Terraform configuration but consists only of variable
 names and assignments. 
 
+Standard Module Structure:
+  main.tf—the primary entry point
+  outputs.tf—declarations for all output values
+  variables.tf—declarations for all input variables
+  
+Architecture  
 
 ![image](https://user-images.githubusercontent.com/32632363/133883949-ef715974-2259-4417-b39c-11286b3df83b.png)
 
