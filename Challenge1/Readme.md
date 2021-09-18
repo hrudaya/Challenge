@@ -10,9 +10,9 @@ uses the same basic syntax as Terraform configuration but consists only of varia
 names and assignments. 
 
 Standard Module Structure:
-  main.tf       the primary entry point
-  outputs.tf    declarations for all output values
-  variables.tf  declarations for all input variables
+main.tf (Primary entry point)
+outputs.tf (Declaration for all output values)
+variables.tf (Declaration for all Input variables)
   
 Architecture  
 
