@@ -39,6 +39,7 @@ module "alb" {
   subnets            = var.vpc.public_subnets
   security_groups    = [var.sg.lb]
 
+# Loadbalancer listens to port 80 and which is mapped to instance port 8080  
   http_tcp_listeners = [
     {
       port               = 80
