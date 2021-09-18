@@ -10,3 +10,6 @@ uses the same basic syntax as Terraform configuration but consists only of varia
 names and assignments. Create a new file called terraform.tfvars
 
 
+![image](https://user-images.githubusercontent.com/32632363/133883949-ef715974-2259-4417-b39c-11286b3df83b.png)
+
+
