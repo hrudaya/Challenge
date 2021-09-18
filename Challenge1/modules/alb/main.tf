@@ -1,3 +1,16 @@
+module "iam_instance_profile" {
+  source  = "terraform-aws-modules/iip/aws"
+  actions = ["logs:*", "rds:*"] 
+}
+
+data "cloudinit_config" "config" {
+  gzip          = true
+  base64_encode = true
+  part {
+    content_type = "text/cloud-config"
+    content      = templatefile("${path.module}/cloud_config.yaml", var.db_config) #B
+  }
+}
 # Get the AMI id's
 data "aws_ami" "ubuntu" {
   most_recent = true
@@ -13,6 +26,9 @@ resource "aws_launch_template" "webserver" {
   image_id      = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
   key_name      = var.ssh_keypair
+  iam_instance_profile {
+    name = module.iam_instance_profile.name
+  }
   vpc_security_group_ids = [var.sg.webserver]
 }
 
