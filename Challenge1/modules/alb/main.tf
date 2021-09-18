@@ -3,6 +3,8 @@ module "iam_instance_profile" {
   actions = ["logs:*", "rds:*"] 
 }
 
+#  This is a fairly simple cloud init file. All it does is install some packages, create a configuration file (/etc/server.conf),
+#  fetch application code (deployment.zip) and start the server  
 data "cloudinit_config" "config" {
   gzip          = true
   base64_encode = true
