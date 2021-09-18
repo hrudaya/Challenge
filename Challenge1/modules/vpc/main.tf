@@ -1,5 +1,7 @@
+# Get the Availibilty zones from Region
 data "aws_availability_zones" "available" {}
 
+# Define CIDR Blocks for vpc, public subnet and private subnet as well db subnet
 module "vpc" { 
   source                           = "terraform-aws-modules/vpc/aws"
   version                          = "2.64.0"
@@ -15,6 +17,7 @@ module "vpc" {
   single_nat_gateway               = true
 }
 
+# Define Security group for Load balancer  
 module "lb_sg" {
   source = "terraform-aws-modules/security-group/aws"
   vpc_id = module.vpc.vpc_id
@@ -23,7 +26,7 @@ module "lb_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }]
 }
-
+# Define Security group for Web server 
 module "webserver_sg" {
   source = "terraform-aws-modules/security-group/aws"
   vpc_id = module.vpc.vpc_id
@@ -39,6 +42,7 @@ module "webserver_sg" {
   ]
 }
 
+# Define Security group for database    
 module "db_sg" {
   source = "terraform-aws-modules/security-group/aws"
   vpc_id = module.vpc.vpc_id
