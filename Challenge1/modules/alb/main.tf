@@ -1,3 +1,4 @@
+# Get the AMI id's
 data "aws_ami" "ubuntu" {
   most_recent = true
   filter {
@@ -12,12 +13,11 @@ resource "aws_launch_template" "webserver" {
   image_id      = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
   key_name      = var.ssh_keypair
-  iam_instance_profile {
-    name = module.iam_instance_profile.name
-  }
   vpc_security_group_ids = [var.sg.webserver]
 }
 
+# The Autoscaling Groups data source allows access to the list of AWS ASGs within a specific region. 
+# This will allow you to pass a list of AutoScaling Groups to other resources.  
 resource "aws_autoscaling_group" "webserver" {
   name                = "${var.namespace}-asg"
   min_size            = 1
