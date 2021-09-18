@@ -14,8 +14,7 @@ module "alb" {
 module "db" {
   source    = "./modules/db" 
   namespace = var.namespace 
-
-    vpc = module.vpc.vpc 
+  vpc = module.vpc.vpc 
   sg  = module.vpc.sg 
 
 }
