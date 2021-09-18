@@ -28,8 +28,9 @@ resource "tls_private_key" "example" {
   rsa_bits  = 4096
 }
 
+# Generating key pair  
 resource "aws_key_pair" "generated_key" {
-  key_name   = var.key_name
+  key_name   = var.ssh_keypair
   public_key = tls_private_key.example.public_key_openssh
 }
   
@@ -37,7 +38,7 @@ resource "aws_launch_template" "webserver" {
   name_prefix   = var.namespace
   image_id      = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
-  key_name      = var.ssh_keypair
+  key_name      = "${aws_key_pair.generated_key.key_name}"
   iam_instance_profile {
     name = module.iam_instance_profile.name
   }
